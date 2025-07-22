@@ -1,5 +1,5 @@
 import express from "express";
-import employees from "../db/employees";
+import employees from "../db/employees.js";
 
 const router = express.Router();
 
@@ -24,14 +24,21 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { name } = req.body;
-
-  if (!name || typeof name !== "string" || name.trim() === "") {
+  if (
+    !req.body ||
+    typeof req.body.name !== "string" ||
+    req.body.name.trim() === ""
+  ) {
     return res.status(400).json({ error: "Name is required" });
   }
 
-  const newId = Math.max(...employees.map((e) => e.id)) + 1;
-  const newEmployee = { id: newId, name };
+  const { name } = req.body;
+
+  const newEmployee = {
+    id: employees.length + 1,
+    name,
+  };
+
   employees.push(newEmployee);
   res.status(201).json(newEmployee);
 });
