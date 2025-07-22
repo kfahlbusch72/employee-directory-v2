@@ -3,7 +3,7 @@ import employees from "../db/employees";
 
 const router = express.Router();
 
-router.ger("/", (req, res) => {
+router.get("/", (req, res) => {
   res.send(employees);
 });
 
