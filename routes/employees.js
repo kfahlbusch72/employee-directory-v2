@@ -17,7 +17,7 @@ router.get("/:id", (req, res) => {
   const employee = employees.find((e) => e.id === +id);
 
   if (!employee) {
-    return res.status(404).send("Employee not found");
+    return res.status(404).send("Employee not found!");
   }
 
   res.send(employee);
@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
     typeof req.body.name !== "string" ||
     req.body.name.trim() === ""
   ) {
-    return res.status(400).json({ error: "Name is required" });
+    return res.status(400).json({ error: "Name is required!" });
   }
 
   const { name } = req.body;
